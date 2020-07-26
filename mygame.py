@@ -29,9 +29,6 @@ class Game(toy.app.IGame):
     def init(self, app):
         self.app = app
         self.game_time = 0.0
-        with open('position_list.pickle', 'rb') as f:
-            positions = pickle.load(f)
-            self.positions = [Vector(*p) for p in positions]
 
     def update2(self, dt):
         self.game_time += dt
@@ -151,10 +148,6 @@ class Game(toy.app.IGame):
             Quaternion.from_euler_angles(Vector(0.0, 0.0 * self.game_time, 0.0)),
             Vector(1.0, 1.0, 1.0) * 1.0
             ).to_matrix()
-        model_draw = toy.draw.LocalDraw(self.app.batch, model_matrix)
-        model_draw.draw_polyline(self.positions, color=toy.coloring.GREEN)
-        for position in self.positions:
-            model_draw.draw_point(position)
 
     def draw(self):
         pass

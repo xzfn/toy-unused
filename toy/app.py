@@ -28,6 +28,9 @@ class IGame(object):
     def on_key_press(self, symbol, modifiers):
         pass
 
+    def on_key_release(self, symbol, modifiers):
+        pass
+
     def update(self, dt):
         pass
 
@@ -47,6 +50,7 @@ class App(object):
         self.window.push_handlers(self.keys)
 
         self.window.push_handlers(on_key_press=self.on_key_press)
+        self.window.push_handlers(on_key_release=self.on_key_release)
         self.window.push_handlers(on_resize=self.on_resize)
         self.window.push_handlers(on_mouse_press=self.on_mouse_press)
         self.window.push_handlers(on_mouse_release=self.on_mouse_release)
@@ -68,6 +72,9 @@ class App(object):
     def on_key_press(self, symbol, modifiers):
         self.freeview.on_key_press(symbol, modifiers)
         self.game.on_key_press(symbol, modifiers)
+
+    def on_key_release(self, symbol, modifiers):
+        self.game.on_key_release(symbol, modifiers)
 
     def on_mouse_press(self, x, y, button, modifiers):
         self.game.on_mouse_press(x, y, button, modifiers)
